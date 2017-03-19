@@ -38,6 +38,9 @@ class Rom(models.Model):
 
         return json
 
+    def __str__(self):
+        return "Rom %s" % self.name
+
 
 
 class RomFile(models.Model):
@@ -48,3 +51,6 @@ class RomFile(models.Model):
 
     class Meta:
         unique_together = ('rom', 'slot')
+
+    def __str__(self):
+        return "RomFile %s %d" % (self.rom.name, self.slot)

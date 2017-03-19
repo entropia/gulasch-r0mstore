@@ -3,13 +3,21 @@ from django.contrib import admin
 from taggit_helpers.admin import TaggitListFilter, TaggitTabularInline
 
 from roms.models import Rom, RomFile
-
+from roms.forms import RomFileForm, RomFileInlineFormSet
 from gulashromstore.settings import SLOT_COUNT
+
 
 class RomFileInline(admin.TabularInline):
     model = RomFile
+    form = RomFileForm
+    formset = RomFileInlineFormSet
+
+    fields = ('slot', 'binary')
+
+    can_delete = False
     max_num = SLOT_COUNT
     min_num = SLOT_COUNT
+
 
 class RomAdmin(admin.ModelAdmin):
     list_display = ('name', 'approved', 'tag_list')
