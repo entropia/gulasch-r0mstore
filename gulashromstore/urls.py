@@ -6,6 +6,7 @@ from gulashromstore.settings import MEDIA_URL, MEDIA_ROOT
 
 urlpatterns = [
     url(r'^roms/', include('roms.urls')),
+    url(r'^users/', include('users.urls')),
     url(r'^admin/', admin.site.urls),
 ]
 

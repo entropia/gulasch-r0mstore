@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+
+{% block title %} Sign up{% endblock %}
+
+
+{% block content %}
+<div class="rom-overview">
+	<div class="columns">
+		<div class="column">
+			<div class="box">
+				<h1 class="title is-1">Registrieren</h1>
+		        {% if user.is_authenticated %}
+		          You are alerady logged in, why in the world would you want to sign up ?
+		        {% else %}
+		    		  {% include 'form.html' with button_text='sign up' %}
+		        {% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
