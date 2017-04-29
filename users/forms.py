@@ -4,18 +4,12 @@ from django.forms import ModelForm
 from users.models import User
 
 class UserCreateForm(ModelForm):
-	password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'input'}))
-	password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput(attrs={'class': 'input'}))
+	password1 = forms.CharField(label='Passwort')
+	password2 = forms.CharField(label='Passwort bestätigen')
 
 	class Meta:
 		model = User
 		fields = ['username', 'email', 'twitter', 'github']
-		widgets = {
-			'username' : forms.TextInput(attrs={'class': 'input'}),
-			'email' : forms.TextInput(attrs={'class': 'input'}),
-			'twitter' : forms.TextInput(attrs={'class': 'input'}),
-			'github' : forms.TextInput(attrs={'class': 'input'}),
-		}
 
 
 	def clean_password2(self):
