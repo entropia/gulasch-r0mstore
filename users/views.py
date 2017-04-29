@@ -1,6 +1,6 @@
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.base import TemplateView
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from django.contrib.auth.tokens import default_token_generator
 from django.template import loader
@@ -11,7 +11,7 @@ from django.core.exceptions import PermissionDenied
 from users.forms import UserCreateForm, UserUpdateForm
 
 class UserCreateView(CreateView):
-	model = User
+	model = get_user_model()
 	form_class = UserCreateForm
 	template_name = 'users/signup.html'
 
@@ -21,7 +21,7 @@ class UserCreateView(CreateView):
 
 
 class UserUpdateView(UpdateView):
-	model = User
+	model = get_user_model()
 	form_class = UserUpdateForm
 	template_name = 'users/user_update.html'
 	pk_url_kwarg = 'user_id'
@@ -40,13 +40,13 @@ class SendConfirmationView(TemplateView):
 
 	def get_context_data(self, **kwargs):
 		context = super(SendConfirmationView, self).get_context_data(**kwargs)
-		context['confirm_user'] = User.objects.get(id=kwargs['user_id'])
+		context['confirm_user'] = get_user_model().objects.get(id=kwargs['user_id'])
 		return context
 
 	def get(self, request, *args, **kwargs):
 		try:
-			user = User.objects.get(id=kwargs['user_id'])
-		except User.DoesNotExist:
+			user = get_user_model().objects.get(id=kwargs['user_id'])
+		except get_user_model().DoesNotExist:
 			raise Http404
 
 		if user.is_active:
@@ -62,7 +62,7 @@ class SendConfirmationView(TemplateView):
 			'user': user
 		}
 
-		subject = "Validate your registration at %s" % site_name
+		subject = "Validate your registration"
 		email = loader.render_to_string(self.email_template_name, context)
 		user.email_user(subject,email)
 
@@ -76,13 +76,13 @@ class CheckConfirmationView(TemplateView):
 
 	def get_context_data(self, **kwargs):
 		context = super(CheckConfirmationView, self).get_context_data(**kwargs)
-		context['confirm_user'] = User.objects.get(id=kwargs['user_id'])
+		context['confirm_user'] = get_user_model().objects.get(id=kwargs['user_id'])
 		return context
 
 	def get(self, request, *args, **kwargs):
 		try:
-			user = User.objects.get(id=kwargs['user_id'])
-		except User.DoesNotExist:
+			user = get_user_model().objects.get(id=kwargs['user_id'])
+		except get_user_model().DoesNotExist:
 			raise Http404
 
 		if user.is_active:

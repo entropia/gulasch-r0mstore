@@ -1,14 +1,14 @@
 from django import forms
 from django.forms import ModelForm
 
-from users.models import User
+from django.contrib.auth import get_user_model
 
 class UserCreateForm(ModelForm):
 	password1 = forms.CharField(label='Passwort')
 	password2 = forms.CharField(label='Passwort bestätigen')
 
 	class Meta:
-		model = User
+		model = get_user_model()
 		fields = ['username', 'email', 'twitter', 'github']
 
 
@@ -51,7 +51,7 @@ class UserUpdateForm(ModelForm):
 	current_password = forms.CharField(label='Current Password', widget=forms.PasswordInput)
 
 	class Meta:
-		model = User
+		model = get_user_model()
 		fields = ['email', 'twitter', 'github']
 
 
