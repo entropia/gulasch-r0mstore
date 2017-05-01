@@ -1,0 +1,7 @@
+Hallo, {{user.username}},
+Danke für die registrierung im Romstore.
+
+Um deinen Account zu aktiveren klicke bitte auf den folgenden Link:
+{{validation_link}}
+
+Viel Spaß!

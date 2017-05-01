@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %} Sign up{% endblock %}
+{% block title %}Registrieren{% endblock %}
 
 {% block content %}
 <div class="rom-overview">
@@ -15,6 +15,7 @@
 				{% else %}
 				<form method="post">
 					{% csrf_token %}
+
 					<div class="field is-horizontal">
 						<div class="field-label is-normal">
 							<label class="label" for="{{form.username.id_for_label}}">{{form.username.label}}</label>

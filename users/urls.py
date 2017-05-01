@@ -17,7 +17,7 @@ urlpatterns = [
 											'post_reset_redirect' : reverse_lazy('password_reset_sent')},
 											name='password_reset'),
 
-	url(r'^password/reset/(?P<uidb36>[0-9A-Za-z]+)/(?P<token>.+)/$', password_reset_confirm,
+	url(r'^password/reset/(?P<uidb64>[0-9A-Za-z]+)/(?P<token>.+)/$', password_reset_confirm,
 														{'template_name' : 'users/password_reset_confirm.html',
 														'post_reset_redirect' : reverse_lazy('login')},
 														name='password_reset_confirm'),

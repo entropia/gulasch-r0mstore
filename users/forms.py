@@ -25,7 +25,7 @@ class UserCreateForm(ModelForm):
 	def clean_email(self):
 		#Make sure Email is unique
 		email = self.cleaned_data.get("email")
-		if User.objects.filter(email = email):
+		if get_user_model().objects.filter(email = email):
 			raise forms.ValidationError("Email already in use.")
 
 		return email
@@ -77,7 +77,7 @@ class UserUpdateForm(ModelForm):
 	def clean_email(self):
 		#Make sure Email is still unique
 		email = self.cleaned_data.get("email")
-		if User.objects.filter(email = email).exclude(id=self.instance.id):
+		if get_user_model().objects.filter(email = email).exclude(id=self.instance.id):
 			raise forms.ValidationError("Email already in use.")
 
 		return email

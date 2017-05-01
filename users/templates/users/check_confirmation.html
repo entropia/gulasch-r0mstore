@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Registerierung abgeschlossen{% endblock %}
+
+{% block content %}
+<div class="rom-overview">
+	<div class="columns">
+		<div class="column">
+			<div class="box">
+				<h1 class="title is-1">Registerierung abgeschlossen</h1>
+				Okay <b>{{confirm_user.username}}</b>,<br/>
+				Danke fürs mitspielen.
+				Deine Registrierung ist jetzt abgeschlossen.<br/>
+				<br/>
+				Jetzt kannst du dich <a href="{% url 'login' %}">einloggen</a>.
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Registerierung bestätigen{% endblock %}
+
+{% block content %}
+<div class="rom-overview">
+	<div class="columns">
+		<div class="column">
+			<div class="box">
+				<h1 class="title is-1">Registerierung bestätigen</h1>
+				Hallo <b>{{confirm_user.username}}</b>,<br/>
+				um deine Registerung abzuschließen klicke bitte auf den Link in der Email
+				die du gerade bekommen hast.<br/>
+				<br/>
+				Keine Mail bekommen?<br/>
+				Dann klicke <a href="{% url 'send_confirmation' user_id=confirm_user.pk %}">hier</a>
+				um eine neue Email zu verschicken.
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Einloggen{% endblock %}
+
+{% block content %}
+<div class="rom-overview">
+	<div class="columns">
+		<div class="column">
+			<div class="box">
+				<h1 class="title is-1">Einloggen</h1>
+				{% if user.is_authenticated %}
+					Du bist doch schon eingeloggt!?<br/>
+					Meinten sie: <a href="{% url 'logout' %}">ausloggen</a> ?
+				{% else %}
+					<form method="post">
+						{% csrf_token %}
+
+						<div class="field is-horizontal">
+							<div class="field-label is-normal">
+								<label class="label" for="{{form.username.id_for_label}}">{{form.username.label}}</label>
+							</div>
+							<div class="field-body">
+								<div class="field is-narrow">
+									<div class="control has-icons-left has-icons-right">
+										<input class="input {% if form.username.errors %}is-danger{% endif %} is-primary"
+										type="text" name="{{form.username.html_name}}"
+										 id="{{form.username.id_for_label}}" value="{{form.username.value|default_if_none:''}}" />
+										<span class="icon is-small is-left">
+											<i class="fa fa-user"></i>
+										</span>
+										<span class="icon is-small is-right">
+											{% if form.username.errors %}
+											<i class="fa fa-warning"></i>
+											{% endif %}
+										</span>
+									</div>
+									<p class="help is-danger">
+										{{form.username.errors.as_text}}
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="field is-horizontal">
+							<div class="field-label is-normal">
+								<label class="label" for="{{form.password.id_for_label}}">{{form.password.label}}</label>
+							</div>
+							<div class="field-body">
+								<div class="field is-narrow">
+									<div class="control has-icons-left has-icons-right">
+										<input class="input {% if form.password.errors %}is-danger{% endif %} is-primary"
+										type="password" name="{{form.password.html_name}}"
+										 id="{{form.password.id_for_label}}" value="{{form.password.value|default_if_none:'' }}" />
+										<span class="icon is-small is-left">
+											<i class="fa fa-unlock-alt"></i>
+										</span>
+										<span class="icon is-small is-right">
+											{% if form.password.errors %}
+											<i class="fa fa-warning"></i>
+											{% endif %}
+										</span>
+									</div>
+									<p class="help is-danger">
+										{{form.password.errors.as_text}}
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="field is-grouped">
+							<p class="control">
+								<button class="button is-primary">Einloggen</button>
+							</p>
+						</div>
+					</form><br/>
+					Och Mist, ich hab mein
+					<a href="{% url 'password_reset' %}" class="resetlink">Passwort vergessen ...</a>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
