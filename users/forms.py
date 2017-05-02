@@ -72,6 +72,15 @@ class UserUpdateForm(ModelForm):
 		return current_password
 
 
+	def clean_new_password1(self):
+		password1 = self.cleaned_data.get("new_password1")
+
+		if password1 != '':
+			validate_password(password1)
+
+		return password1
+
+
 	def clean_new_password2(self):
 		password1 = self.cleaned_data.get("new_password1")
 		password2 = self.cleaned_data.get("new_password2")

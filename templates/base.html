@@ -18,8 +18,10 @@
 					<a class="nav-item">
 						<img src="{% static "images/logo.png" %}"/>
 					</a>
-					<a class="nav-item is-tab is-hidden-mobile is-active">Roms</a>
-					<a class="nav-item is-tab is-hidden-mobile">Upload Rom</a>
+					<a class="nav-item is-tab is-hidden-mobile">Roms</a>
+					{% if user.is_authenticated %}
+					<a class="nav-item is-tab is-hidden-mobile">Rom Hochladen</a>
+					{% endif %}
 				</div>
 				<span class="nav-toggle">
 					<span></span>
@@ -29,13 +31,17 @@
 
 				<div class="nav-right nav-menu">
 					<a class="nav-item is-tab is-hidden-tablet is-active">Roms</a>
+					{% if user.is_authenticated %}
 					<a class="nav-item is-tab is-hidden-tablet">Rom Hochladen</a>
+					{% endif %}
 
+					{% if not user.is_authenticated %}
 					<a class="nav-item is-tab">Registrieren</a>
-					<a class="nav-item is-tab">
-						Einstellungen
-					</a>
 					<a class="nav-item is-tab">Login</a>
+					{% else %}
+					<a class="nav-item is-tab">Profil</a>
+					<a class="nav-item is-tab">Logout</a>
+					{% endif %}
 				</div>
 			</div>
 		</nav>

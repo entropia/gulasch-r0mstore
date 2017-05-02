@@ -29,7 +29,7 @@ class UserUpdateView(UpdateView):
 		return self.model.objects.filter(id=self.request.user.id)
 
 	def get_success_url(self):
-		return reverse('geometry_create')
+		return reverse('rom_overview')
 
 
 

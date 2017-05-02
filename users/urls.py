@@ -26,5 +26,5 @@ urlpatterns = [
 														name='password_reset_sent'),
 
 	url(r'^login/$', login, {'template_name' : 'users/login.html'}, name='login'),
-	url(r'^logout/$', logout ,{'next_page' : reverse_lazy('login')}, name='logout'),
+	url(r'^logout/$', logout ,{'next_page' : reverse_lazy('login')}, name='logout')
 ]

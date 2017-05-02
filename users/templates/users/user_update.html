@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}Profil bearbeiten{% endblock %}
+
+{% block content %}
+<div class="rom-overview">
+	<div class="columns">
+		<div class="column">
+			<div class="box">
+				<h1 class="title is-1">Profil bearbeiten</h1>
+				<form method="post">
+					{% csrf_token %}
+
+					<div class="field is-horizontal">
+						<div class="field-label is-normal">
+							<label class="label" for="{{form.email.id_for_label}}">{{form.email.label}}</label>
+						</div>
+						<div class="field-body">
+							<div class="field is-narrow">
+								<div class="control has-icons-left has-icons-right">
+									<input class="input {% if form.email.errors %}is-danger{% endif %} is-primary"
+									type="text" name="{{form.email.html_name}}"
+									 id="{{form.email.id_for_label}}" value="{{form.email.value|default_if_none:''}}" />
+									<span class="icon is-small is-left">
+										<i class="fa fa-envelope"></i>
+									</span>
+									<span class="icon is-small is-right">
+										{% if form.email.errors %}
+										<i class="fa fa-warning"></i>
+										{% endif %}
+									</span>
+								</div>
+								<p class="help is-danger">
+									{{form.email.errors.as_text}}
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="field is-horizontal">
+						<div class="field-label is-normal">
+							<label class="label" for="{{form.current_password.id_for_label}}">{{form.current_password.label}}</label>
+						</div>
+						<div class="field-body">
+							<div class="field is-narrow">
+								<div class="control has-icons-left has-icons-right">
+									<input class="input {% if form.current_password.errors %}is-danger{% endif %} is-primary"
+									type="password" name="{{form.current_password.html_name}}"
+									 id="{{form.current_password.id_for_label}}" value="{{form.current_password.value|default_if_none:'' }}" />
+									<span class="icon is-small is-left">
+										<i class="fa fa-unlock-alt"></i>
+									</span>
+									<span class="icon is-small is-right">
+										{% if form.current_password.errors %}
+										<i class="fa fa-warning"></i>
+										{% endif %}
+									</span>
+								</div>
+								<p class="help is-danger">
+									{{form.current_password.errors.as_text}}
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="field is-horizontal">
+						<div class="field-label is-normal">
+							<label class="label" for="{{form.new_password1.id_for_label}}">{{form.new_password1.label}}</label>
+						</div>
+						<div class="field-body">
+							<div class="field is-narrow">
+								<div class="control has-icons-left has-icons-right">
+									<input class="input {% if form.new_password1.errors %}is-danger{% endif %}"
+									type="password" name="{{form.new_password1.html_name}}"
+									 id="{{form.new_password1.id_for_label}}" value="{{form.new_password1.value|default_if_none:'' }}" />
+									<span class="icon is-small is-left">
+										<i class="fa fa-unlock-alt"></i>
+									</span>
+									<span class="icon is-small is-right">
+										{% if form.new_password1.errors %}
+										<i class="fa fa-warning"></i>
+										{% endif %}
+									</span>
+								</div>
+								<p class="help is-danger">
+									{{form.new_password1.errors.as_text}}
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="field is-horizontal">
+						<div class="field-label is-normal">
+							<label class="label" for="{{form.new_password2.id_for_label}}">{{form.new_password2.label}}</label>
+						</div>
+						<div class="field-body">
+							<div class="field is-narrow">
+								<div class="control has-icons-left has-icons-right">
+									<input class="input {% if form.new_password2.errors %}is-danger{% endif %}"
+									type="password" name="{{form.new_password2.html_name}}"
+									 id="{{form.new_password2.id_for_label}}" value="{{form.new_password2.value|default_if_none:'' }}" />
+									<span class="icon is-small is-left">
+										<i class="fa fa-unlock"></i>
+									</span>
+									<span class="icon is-small is-right">
+										{% if form.new_password2.errors %}
+										<i class="fa fa-warning"></i>
+										{% endif %}
+									</span>
+								</div>
+								<p class="help is-danger">
+									{{form.new_password2.errors.as_text}}
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="field is-horizontal">
+						<div class="field-label is-normal">
+							<label class="label" for="{{form.twitter.id_for_label}}">{{form.twitter.label}}</label>
+						</div>
+						<div class="field-body">
+							<div class="field is-narrow">
+								<div class="control has-icons-left has-icons-right">
+									<input class="input {% if form.twitter.errors %}is-danger{% endif %}"
+									type="text" name="{{form.twitter.html_name}}"
+									 id="{{form.twitter.id_for_label}}" value="{{form.twitter.value|default_if_none:'' }}" />
+									<span class="icon is-small is-left">
+										<i class="fa fa-twitter"></i>
+									</span>
+									<span class="icon is-small is-right">
+										{% if form.twitter.errors %}
+										<i class="fa fa-warning"></i>
+										{% endif %}
+									</span>
+								</div>
+								<p class="help is-danger">
+									{{form.twitter.errors.as_text}}
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="field is-horizontal">
+						<div class="field-label is-normal">
+							<label class="label" for="{{form.github.id_for_label}}">{{form.github.label}}</label>
+						</div>
+						<div class="field-body">
+							<div class="field is-narrow">
+								<div class="control has-icons-left has-icons-right">
+									<input class="input {% if form.github.errors %}is-danger{% endif %}"
+									type="text" name="{{form.github.html_name}}"
+									 id="{{form.github.id_for_label}}" value="{{form.github.value|default_if_none:'' }}" />
+									<span class="icon is-small is-left">
+										<i class="fa fa-github"></i>
+									</span>
+									<span class="icon is-small is-right">
+										{% if form.github.errors %}
+										<i class="fa fa-warning"></i>
+										{% endif %}
+									</span>
+								</div>
+								<p class="help is-danger">
+									{{form.github.errors.as_text}}
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="field is-grouped">
+						<p class="control">
+							<button class="button is-primary">Registrieren</button>
+						</p>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
