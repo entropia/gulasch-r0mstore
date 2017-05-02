@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}Profil bearbeiten{% endblock %}
+{% block nav_profile_class %}is-active{% endblock %}
 
 {% block content %}
 <div class="rom-overview">
@@ -8,6 +9,16 @@
 		<div class="column">
 			<div class="box">
 				<h1 class="title is-1">Profil bearbeiten</h1>
+				{% if form.non_field_errors %}
+					<div class="message is-danger">
+						<div class="message-header">
+							<strong>Nope!</strong>
+						</div>
+						<div class="message-body">
+							{{ form.non_field_errors }}
+						</div>
+					</div>
+				{% endif %}
 				<form method="post">
 					{% csrf_token %}
 

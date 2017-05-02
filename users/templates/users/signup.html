@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}Registrieren{% endblock %}
+{% block nav_signup_class %}is-active{% endblock %}
 
 {% block content %}
 <div class="rom-overview">
@@ -13,6 +14,16 @@
 				Du bist eingeloggt und willst du dich registrieren.<br/>
 				Geh heim du bist besoffen!
 				{% else %}
+				{% if form.non_field_errors %}
+					<div class="message is-danger">
+						<div class="message-header">
+							<strong>Nope!</strong>
+						</div>
+						<div class="message-body">
+							{{ form.non_field_errors }}
+						</div>
+					</div>
+				{% endif %}
 				<form method="post">
 					{% csrf_token %}
 

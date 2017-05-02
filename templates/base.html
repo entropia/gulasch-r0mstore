@@ -18,9 +18,15 @@
 					<a class="nav-item">
 						<img src="{% static "images/logo.png" %}"/>
 					</a>
-					<a class="nav-item is-tab is-hidden-mobile">Roms</a>
+					<a class="nav-item is-tab is-hidden-mobile {% block nav_rom_class %}{% endblock %}"
+						href="">
+						Roms
+					</a>
 					{% if user.is_authenticated %}
-					<a class="nav-item is-tab is-hidden-mobile">Rom Hochladen</a>
+					<a class="nav-item is-tab is-hidden-mobile {% block nav_rom_upload_class %}{% endblock %}"
+						href="">
+						Rom Hochladen
+					</a>
 					{% endif %}
 				</div>
 				<span class="nav-toggle">
@@ -30,17 +36,35 @@
 				</span>
 
 				<div class="nav-right nav-menu">
-					<a class="nav-item is-tab is-hidden-tablet is-active">Roms</a>
+					<a class="nav-item is-tab is-hidden-tablet {% block nav_mobile_rom_class %}{% endblock %}"
+						href="">
+						Roms
+					</a>
 					{% if user.is_authenticated %}
-					<a class="nav-item is-tab is-hidden-tablet">Rom Hochladen</a>
+					<a class="nav-item is-tab is-hidden-tablet {% block nav_mobile_rom_upload_class %}{% endblock %}"
+						href="">
+						Rom Hochladen
+					</a>
 					{% endif %}
 
 					{% if not user.is_authenticated %}
-					<a class="nav-item is-tab">Registrieren</a>
-					<a class="nav-item is-tab">Login</a>
+					<a class="nav-item is-tab {% block nav_signup_class %}{% endblock %}"
+						href="{% url 'signup' %}">
+						Registrieren
+					</a>
+					<a class="nav-item is-tab {% block nav_login_class %}{% endblock %}"
+						href="{% url 'login' %}">
+						Login
+					</a>
 					{% else %}
-					<a class="nav-item is-tab">Profil</a>
-					<a class="nav-item is-tab">Logout</a>
+					<a class="nav-item is-tab {% block nav_profile_class %}{% endblock %}"
+						href="{% url 'user_update' user_id=user.pk %}">
+						Profil
+					</a>
+					<a class="nav-item is-tab"
+						href="{% url 'logout' %}">
+						Logout
+					</a>
 					{% endif %}
 				</div>
 			</div>
