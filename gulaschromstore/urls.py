@@ -2,7 +2,7 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from gulashromstore.settings import MEDIA_URL, MEDIA_ROOT
+from gulaschromstore.settings import MEDIA_URL, MEDIA_ROOT
 
 urlpatterns = [
     url(r'^roms/', include('roms.urls')),
