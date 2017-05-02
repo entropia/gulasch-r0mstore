@@ -2,6 +2,7 @@ from django import forms
 from django.forms import ModelForm
 
 from django.contrib.auth import get_user_model
+from django.contrib.auth.password_validation import validate_password
 
 class UserCreateForm(ModelForm):
 	password1 = forms.CharField(label='Passwort')
@@ -10,6 +11,13 @@ class UserCreateForm(ModelForm):
 	class Meta:
 		model = get_user_model()
 		fields = ['username', 'email', 'twitter', 'github']
+
+	def clean_password1(self):
+		password1 = self.cleaned_data.get("password1")
+
+		validate_password(password1)
+
+		return password1
 
 
 	def clean_password2(self):

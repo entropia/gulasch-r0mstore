@@ -15,7 +15,6 @@ class UserCreateView(CreateView):
 	form_class = UserCreateForm
 	template_name = 'users/signup.html'
 
-
 	def get_success_url(self):
 		return reverse('send_confirmation', kwargs={'user_id' : self.object.pk})
 
