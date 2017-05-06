@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'taggit',
     'taggit_helpers',
+    'stdimage',
     'users',
     'roms'
 ]
@@ -135,3 +136,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 AUTH_USER_MODEL = 'users.User'
 
 LOGIN_REDIRECT_URL = '/'
+
+TAGGIT_CASE_INSENSITIVE = True

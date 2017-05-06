@@ -19,7 +19,7 @@
 						<img src="{% static "images/logo.png" %}"/>
 					</a>
 					<a class="nav-item is-tab is-hidden-mobile {% block nav_rom_class %}{% endblock %}"
-						href="">
+						href="{% url 'romlist' %}">
 						Roms
 					</a>
 					{% if user.is_authenticated %}
@@ -37,7 +37,7 @@
 
 				<div class="nav-right nav-menu">
 					<a class="nav-item is-tab is-hidden-tablet {% block nav_mobile_rom_class %}{% endblock %}"
-						href="">
+						href="{% url 'romlist' %}">
 						Roms
 					</a>
 					{% if user.is_authenticated %}
