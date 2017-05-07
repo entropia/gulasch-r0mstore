@@ -24,7 +24,7 @@
 	<div class="columns">
 	{% for rom in roms %}
 			<div class="column is-one-quarter">
-				<a class="box has-text-centered">
+				<a class="box has-text-centered" href="{% url 'romdetails' id=rom.pk %}">
 					<img src="{% get_media_prefix %}/{{rom.cover.small}}" />
 					<h1 class="title is-4">{{ rom.name }}</h1>
 				</a>

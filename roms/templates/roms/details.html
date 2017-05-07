@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block title %}{{rom.name}}{% endblock %}
+{% block nav_rom_class %}is-active{% endblock %}
+
+
+{% block content %}
+<div class="rom-overview">
+	<div class="columns">
+		<div class="column">
+			<div class="box">
+				<h1 class="title is-2">{{rom.name}}</h1>
+
+				<div class="columns less-margin">
+					<div class="column">
+						{% for tag in rom.tags.all %}
+						<a href="{% url 'romlist' tag=tag.slug %}"><span class="tag is-medium categorie is-primary">{{tag.name}}</span></a>
+						{% endfor %}
+						<br/><br/>
+						{{rom.description|linebreaks}}
+						<br/><br/>
+						<div class="tabs is-boxed">
+						  <ul>
+						    <li class="is-active">
+						      <a>
+						        <span class="icon is-small"><i class="fa fa-wifi"></i></span>
+						        <span>Flashen per Wifi</span>
+						      </a>
+						    </li>
+						    <li>
+						      <a>
+						        <span class="icon is-small"><i class="fa fa-usb"></i></span>
+						        <span>Manuell flashen</span>
+						      </a>
+						    </li>
+						</ul>
+						</div>
+						<div class="tab-body">
+							Hier könnte eine Anleitung stehen.
+						</div>
+
+					</div>
+					<div class="column  is-one-third">
+						<img src="{% get_media_prefix %}/{{rom.cover.large}}"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -31,6 +31,16 @@ class RomList(ListView):
         return context
 
 
+class RomDetailView(DetailView):
+    pk_url_kwarg = 'id'
+    template_name = 'roms/details.html'
+    context_object_name = 'rom'
+
+    def get_queryset(self):
+        queryset = Rom.objects.all().filter(approved = True)
+        return queryset
+
+
 class RomListJson(ListView):
 
     def get_queryset(self):
@@ -63,8 +73,11 @@ class RomListJson(ListView):
 
 
 class RomDetailViewJson(DetailView):
-    model = Rom
     pk_url_kwarg = 'id'
+
+    def get_queryset(self):
+        queryset = Rom.objects.all().filter(approved = True)
+        return queryset
 
     def render_to_response(self, context, **response_kwargs):
         rom = self.get_object()

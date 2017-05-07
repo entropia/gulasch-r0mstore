@@ -4282,3 +4282,9 @@ label.panel-block {
     background-repeat-background-position: center; }
   .rom-overview .categorie {
     margin: 0.5vw; }
+.less-margin {
+    margin-top: -2.5rem;
+}
+.tab-body {
+    padding-left: 1vw;
+}
