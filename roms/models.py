@@ -18,17 +18,20 @@ def upload_binary_to(instance, filename):
 
 
 class Rom(models.Model):
-    name = models.CharField("name", max_length = 128)
+    name = models.CharField("name", max_length = 128, unique=True)
     description = models.TextField("description")
     cover = StdImageField("cover image",
                                  upload_to = upload_cover_to,
                                  validators = [MinSizeValidator(300,300)],
                                  variations = {'large': {'width': 600, 'height': 600, 'crop': True},
                                              'small': {'width': 300, 'height': 300, 'crop': True}})
-    low_binary = models.FileField("low binary", upload_to=upload_binary_to)
-    high_binary = models.FileField("high binary", upload_to=upload_binary_to)
+    low_binary = models.FileField("low binary", upload_to = upload_binary_to)
+    high_binary = models.FileField("high binary", upload_to = upload_binary_to)
     approved = models.BooleanField("approved")
     tags = TaggableManager(blank = True)
+    creation_time = models.DateTimeField("creation time", auto_now_add = True)
+    edit_time = models.DateTimeField("edit time", auto_now = True)
+
 
     def tag_list(self):
         return [t.name for t in self.tags.all()]
