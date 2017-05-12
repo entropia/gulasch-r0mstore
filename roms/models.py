@@ -43,7 +43,9 @@ class Rom(models.Model):
             'description' : self.description,
             'tags' : self.tag_list(),
             'low_binary' : self.low_binary.url,
-            'high_binary' : self.high_binary.url
+            'high_binary' : self.high_binary.url,
+            'creation_time' : self.creation_time,
+            'edit_time' : self.edit_time
         }
 
         return json
