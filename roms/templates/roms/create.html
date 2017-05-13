@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+
+{% block title %}Rom Hochladen{% endblock %}
+{% block nav_rom_upload_class %}is-active{% endblock %}
+
+{% block content %}
+
+<div class="rom-overview">
+	<div class="columns">
+		<div class="column">
+			<div class="box">
+				<h1 class="title is-1">Neues Rom Hochladen</h1>
+				{% if form.non_field_errors %}
+					<div class="message is-danger">
+						<div class="message-header">
+							<strong>Nope!</strong>
+						</div>
+						<div class="message-body">
+							{{ form.non_field_errors }}
+						</div>
+					</div>
+				{% endif %}
+
+				<form enctype="multipart/form-data" method="post">
+					{% csrf_token %}
+					<div class="field is-horizontal">
+						<div class="field-label is-normal">
+							<label class="label" for="{{form.name.id_for_label}}">{{form.name.label}}</label>
+						</div>
+						<div class="field-body">
+							<div class="field is-narrow">
+								<div class="control has-icons-left has-icons-right">
+									<input class="input {% if form.name.errors %}is-danger{% endif %} is-primary"
+									type="text" name="{{form.name.html_name}}"
+									 id="{{form.name.id_for_label}}" value="{{form.name.value|default_if_none:''}}" />
+									<span class="icon is-small is-left">
+							        	<i class="fa  fa-chevron-right"></i>
+							     	</span>
+									<span class="icon is-small is-right">
+										{% if form.name.errors %}
+							        	<i class="fa fa-warning"></i>
+										{% endif %}
+							      	</span>
+								</div>
+								<p class="help is-danger">
+									{{form.name.errors.as_text}}
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="field is-horizontal">
+						<div class="field-label is-normal">
+							<label class="label" for="{{form.tags.id_for_label}}">{{form.tags.label}}</label>
+						</div>
+						<div class="field-body">
+							<div class="field is-narrow">
+								<div class="control has-icons-left has-icons-right">
+									<input class="input {% if form.tags.errors %}is-danger{% endif %}"
+									type="text" name="{{form.tags.html_name}}"
+									 id="{{form.tags.id_for_label}}" value="{{form.tags.value|default_if_none:''}}" />
+									<span class="icon is-small is-left">
+							        	<i class="fa  fa-tags"></i>
+							     	</span>
+									<span class="icon is-small is-right">
+										{% if form.tags.errors %}
+							        	<i class="fa fa-warning"></i>
+										{% endif %}
+							      	</span>
+								</div>
+								<p class="help is-danger">
+									{{form.tags.errors.as_text}}
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="field is-horizontal">
+						<div class="field-label is-normal">
+							<label class="label" for="{{form.description.id_for_label}}">{{form.description.label}}</label>
+						</div>
+						<div class="field-body">
+							<div class="field">
+								<p class="control">
+									<textarea name="{{form.description.html_name}}"
+										id="{{form.description.id_for_label}}"
+										class="textarea {% if form.description.errors %}is-danger{% endif %} is-primary">{{form.description.value|default_if_none:''}}</textarea>
+								</p>
+								<p class="help is-danger">
+									{{form.description.errors.as_text}}
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="field is-horizontal">
+						<div class="field-label is-normal">
+							<label class="label" for="{{form.cover.id_for_label}}">{{form.cover.label}}</label>
+						</div>
+						<div class="field-body">
+							<div class="field is-narrow has-addons">
+								<input class="hidden" type="file" name="{{form.cover.html_name}}" id="{{form.cover.id_for_label}}" value="{{form.cover.value|default_if_none:''}}" />
+
+								<div class="control has-icons-left has-icons-right">
+									<input class="input {% if form.cover.errors %}is-danger{% endif %} is-primary"
+									type="text" value="{{form.cover.value|default_if_none:''}}" />
+									<span class="icon is-small is-left">
+										<i class="fa fa-picture-o"></i>
+									</span>
+									<span class="icon is-small is-right">
+										{% if form.cover.errors %}
+										<i class="fa fa-warning"></i>
+										{% endif %}
+									</span>
+								</div>
+								<div class="control">
+									<a class="button is-primary">
+										Durchsuchen
+									</a>
+								</div>
+							</div>
+							<p class="help is-danger">
+								{{form.cover.errors.as_text}}
+							</p>
+						</div>
+					</div>
+
+					<div class="field is-horizontal">
+						<div class="field-label is-normal">
+							<label class="label" for="{{form.high_binary.id_for_label}}">{{form.high_binary.label}}</label>
+						</div>
+						<div class="field-body">
+							<div class="field is-narrow has-addons">
+								<input class="hidden" type="file" name="{{form.high_binary.html_name}}" id="{{form.high_binary.id_for_label}}" value="{{form.high_binary.value|default_if_none:''}}" />
+
+								<div class="control has-icons-left has-icons-right">
+									<input class="input {% if form.high_binary.errors %}is-danger{% endif %} is-primary"
+									type="text" value="{{form.high_binary.value|default_if_none:''}}" />
+									<span class="icon is-small is-left">
+										<i class="fa fa-microchip"></i>
+									</span>
+									<span class="icon is-small is-right">
+										{% if form.high_binary.errors %}
+										<i class="fa fa-warning"></i>
+										{% endif %}
+									</span>
+								</div>
+								<div class="control">
+									<a class="button is-primary">
+										Durchsuchen
+									</a>
+								</div>
+							</div>
+							<p class="help is-danger">
+								{{form.high_binary.errors.as_text}}
+							</p>
+						</div>
+					</div>
+
+
+					<div class="field is-horizontal">
+						<div class="field-label is-normal">
+							<label class="label" for="{{form.low_binary.id_for_label}}">{{form.low_binary.label}}</label>
+						</div>
+						<div class="field-body">
+							<div class="field is-narrow has-addons">
+								<input class="hidden" type="file" name="{{form.low_binary.html_name}}" id="{{form.low_binary.id_for_label}}" value="{{form.low_binary.value|default_if_none:''}}" />
+
+								<div class="control has-icons-left has-icons-right">
+									<input class="input {% if form.low_binary.errors %}is-danger{% endif %} is-primary"
+									type="text" value="{{form.low_binary.value|default_if_none:''}}" />
+									<span class="icon is-small is-left">
+										<i class="fa fa-microchip"></i>
+									</span>
+									<span class="icon is-small is-right">
+										{% if form.low_binary.errors %}
+										<i class="fa fa-warning"></i>
+										{% endif %}
+									</span>
+								</div>
+								<div class="control">
+									<a class="button is-primary">
+										Durchsuchen
+									</a>
+								</div>
+							</div>
+							<p class="help is-danger">
+								{{form.low_binary.errors.as_text}}
+							</p>
+						</div>
+					</div>
+
+					<div class="field is-grouped">
+						<p class="control">
+							<button class="button is-primary">Hochladen</button>
+						</p>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("input[type='file']").each(function () {
+		var fileField = $(this);
+        var textField = fileField.next('.control').find('input');
+		var button = fileField.next('.control').next('.control').find('a');
+
+
+        fileField.change(function() {
+            textField.val(fileField.val());
+        });
+
+		button.click(function() {
+			fileField.click()
+		});
+    });
+});
+</script>
+{% endblock %}

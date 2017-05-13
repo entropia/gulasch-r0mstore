@@ -1,6 +1,10 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
+from django.contrib.auth import get_user_model
+from django.db.models import Q
 
 from taggit.models import Tag
 
@@ -37,8 +41,26 @@ class RomDetailView(DetailView):
     context_object_name = 'rom'
 
     def get_queryset(self):
-        queryset = Rom.objects.all().filter(approved = True)
+        queryset = Rom.objects.all().filter(Q(approved = True) | Q(user__id = self.request.user.id))
         return queryset
+
+
+class RomCreateView(LoginRequiredMixin, CreateView):
+    model = Rom
+    fields = ['name', 'description', 'cover', 'low_binary', 'high_binary', 'tags']
+    template_name = 'roms/create.html'
+
+    def get_queryset(self):
+        return Rom.objects.filtered(user__id = request.user.id)
+
+    def form_valid(self, form):
+        res = super(RomCreateView, self).form_valid(form)
+
+        self.object.user = self.request.user
+        self.object.save()
+
+        return res
+
 
 
 class RomListJson(ListView):

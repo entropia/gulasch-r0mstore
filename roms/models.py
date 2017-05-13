@@ -3,11 +3,14 @@ import uuid
 
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse
 
 from taggit.managers import TaggableManager
 
 from stdimage.models import StdImageField
 from stdimage.validators import MinSizeValidator
+
+from users.models import User
 
 def upload_cover_to(instance, filename):
     _, ext = os.path.splitext(filename)
@@ -27,11 +30,14 @@ class Rom(models.Model):
                                              'small': {'width': 300, 'height': 300, 'crop': True}})
     low_binary = models.FileField("low binary", upload_to = upload_binary_to)
     high_binary = models.FileField("high binary", upload_to = upload_binary_to)
-    approved = models.BooleanField("approved")
+    approved = models.BooleanField("approved", default=False)
     tags = TaggableManager(blank = True)
+    user = models.ForeignKey(User, blank=True, null=True)
     creation_time = models.DateTimeField("creation time", auto_now_add = True)
     edit_time = models.DateTimeField("edit time", auto_now = True)
 
+    def get_absolute_url(self):
+        return reverse('romdetails', kwargs={'id' : self.pk})
 
     def tag_list(self):
         return [t.name for t in self.tags.all()]
@@ -40,6 +46,7 @@ class Rom(models.Model):
         json = {
             'id' : self.pk,
             'name' : self.name,
+            'user' : self.user.name,
             'description' : self.description,
             'tags' : self.tag_list(),
             'low_binary' : self.low_binary.url,
