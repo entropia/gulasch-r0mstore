@@ -1,6 +1,6 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.contrib.auth import get_user_model
@@ -50,9 +50,6 @@ class RomCreateView(LoginRequiredMixin, CreateView):
     fields = ['name', 'description', 'cover', 'low_binary', 'high_binary', 'tags']
     template_name = 'roms/create.html'
 
-    def get_queryset(self):
-        return Rom.objects.filtered(user__id = request.user.id)
-
     def form_valid(self, form):
         res = super(RomCreateView, self).form_valid(form)
 
@@ -60,6 +57,17 @@ class RomCreateView(LoginRequiredMixin, CreateView):
         self.object.save()
 
         return res
+
+
+class RomUpdateView(LoginRequiredMixin, UpdateView):
+    model = Rom
+    pk_url_kwarg = 'id'
+    fields = ['description', 'cover', 'low_binary', 'high_binary', 'tags']
+    template_name = 'roms/update.html'
+
+    def get_queryset(self):
+        return Rom.objects.filter(user__id = self.request.user.id)
+
 
 
 
