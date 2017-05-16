@@ -46,7 +46,7 @@ class Rom(models.Model):
         json = {
             'id' : self.pk,
             'name' : self.name,
-            'user' : self.user.name,
+            'user' : self.user.username,
             'description' : self.description,
             'tags' : self.tag_list(),
             'low_binary' : self.low_binary.url,
