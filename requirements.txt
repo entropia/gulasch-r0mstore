@@ -1,5 +1,6 @@
-appdirs==1.4.0
-Django==1.10.5
+appdirs==1.4.3
+Django==1.10.6
+django-autocomplete-light==3.2.7
 django-stdimage==2.4.1
 django-taggit==0.22.0
 django-taggit-helpers==0.1.4
@@ -7,6 +8,6 @@ olefile==0.44
 packaging==16.8
 Pillow==4.0.0
 progressbar2==3.20.0
-pyparsing==2.1.10
+pyparsing==2.2.0
 python-utils==2.1.0
 six==1.10.0
