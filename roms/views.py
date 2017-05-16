@@ -7,8 +7,10 @@ from django.contrib.auth import get_user_model
 from django.db.models import Q
 
 from taggit.models import Tag
+from dal import autocomplete
 
 from roms.models import Rom
+from roms.forms import RomCreateForm, RomUpdateForm
 
 
 class RomList(ListView):
@@ -47,7 +49,7 @@ class RomDetailView(DetailView):
 
 class RomCreateView(LoginRequiredMixin, CreateView):
     model = Rom
-    fields = ['name', 'description', 'cover', 'low_binary', 'high_binary', 'tags']
+    form_class = RomCreateForm
     template_name = 'roms/create.html'
 
     def form_valid(self, form):
@@ -62,13 +64,25 @@ class RomCreateView(LoginRequiredMixin, CreateView):
 class RomUpdateView(LoginRequiredMixin, UpdateView):
     model = Rom
     pk_url_kwarg = 'id'
-    fields = ['description', 'cover', 'low_binary', 'high_binary', 'tags']
+    form_class = RomUpdateForm
     template_name = 'roms/update.html'
 
     def get_queryset(self):
         return Rom.objects.filter(user__id = self.request.user.id)
 
 
+class TagAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated():
+            return Tag.objects.none()
+
+        qs = Tag.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs
 
 
 class RomListJson(ListView):

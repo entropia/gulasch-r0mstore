@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'taggit',
     'taggit_helpers',
+    'dal',
+    'dal_select2',
     'stdimage',
     'users',
     'roms'

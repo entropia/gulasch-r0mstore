@@ -30,18 +30,8 @@
 						</div>
 						<div class="field-body">
 							<div class="field is-narrow">
-								<div class="control has-icons-left has-icons-right">
-									<input class="input {% if form.tags.errors %}is-danger{% endif %}"
-									type="text" name="{{form.tags.html_name}}"
-									 id="{{form.tags.id_for_label}}" value="{{form.tags.value|default_if_none:''}}" />
-									<span class="icon is-small is-left">
-							        	<i class="fa  fa-tags"></i>
-							     	</span>
-									<span class="icon is-small is-right">
-										{% if form.tags.errors %}
-							        	<i class="fa fa-warning"></i>
-										{% endif %}
-							      	</span>
+								<div class="control">
+									{{form.tags}}
 								</div>
 								<p class="help is-danger">
 									{{form.tags.errors.as_text}}
@@ -167,7 +157,7 @@
 
 					<div class="field is-grouped">
 						<p class="control">
-							<button class="button is-primary">Hochladen</button>
+							<button class="button is-primary">Speichern</button>
 						</p>
 					</div>
 				</form>
@@ -194,4 +184,6 @@ $(document).ready(function() {
     });
 });
 </script>
+
+{{ form.media }}
 {% endblock %}
