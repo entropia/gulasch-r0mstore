@@ -4288,6 +4288,9 @@ label.panel-block {
 .tab-body {
     padding-left: 1vw;
 }
+.tab-body li {
+    margin-left: 1.5vw;
+}
 .hidden {
     display: none;
 }

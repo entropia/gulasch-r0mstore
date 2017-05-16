@@ -31,13 +31,13 @@
 						<br/><br/>
 						<div class="tabs is-boxed">
 						  <ul>
-						    <li class="is-active">
+						    <li class="is-active" data-for-id="wifi-tab">
 						      <a>
 						        <span class="icon is-small"><i class="fa fa-wifi"></i></span>
 						        <span>Flashen per Wifi</span>
 						      </a>
 						    </li>
-						    <li>
+						    <li data-for-id="manual-tab">
 						      <a>
 						        <span class="icon is-small"><i class="fa fa-usb"></i></span>
 						        <span>Manuell flashen</span>
@@ -45,8 +45,19 @@
 						    </li>
 						</ul>
 						</div>
-						<div class="tab-body">
-							Hier könnte eine Anleitung stehen.
+						<div id="wifi-tab" class="tab-body">
+							<ol>
+								<li>Versetze das Badge in Bootloadermodus</li>
+								<li>
+									Wähle die Rom-ID:
+									<h3 class="title is-3">{{rom.id}}</h3>
+								</li>
+								<li>Wähle den Ziel-Slot</li>
+								<li>Warte auf den Neustart</li>
+							</ol>
+						</div>
+						<div id="manual-tab" class="tab-body">
+							Manuell: Hier könnte eine Anleitung stehen.
 						</div>
 
 					</div>
@@ -58,4 +69,19 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#manual-tab").hide();
+
+	$(".tabs li").click(function() {
+		$(".tabs .is-active").removeClass("is-active");
+		$(this).addClass("is-active");
+
+		$(".tab-body").hide();
+		active_tab = $(this).attr("data-for-id");
+		$("#" + active_tab).show();
+	});
+});
+</script>
 {% endblock %}
