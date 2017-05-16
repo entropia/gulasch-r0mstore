@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 
-from roms.views import RomListJson, RomDetailViewJson, RomList, RomDetailView, RomCreateView, RomUpdateView
+from roms.views import RomListJson, RomDetailViewJson, RomList, RomDetailView, RomCreateView, RomUpdateView, TagAutocomplete
 
 urlpatterns = [
     url(r'^json/list/$', RomListJson.as_view()),
@@ -12,5 +12,7 @@ urlpatterns = [
     url(r'^details/(?P<id>[0-9]+)/$', RomDetailView.as_view(), name = 'romdetails'),
 
     url(r'^new/$', RomCreateView.as_view(), name = 'romcreate'),
-    url(r'^edit/(?P<id>[0-9]+)/$', RomUpdateView.as_view(), name = 'romupdate')
+    url(r'^edit/(?P<id>[0-9]+)/$', RomUpdateView.as_view(), name = 'romupdate'),
+
+    url(r'^tag-autocomplete/$', TagAutocomplete.as_view(), name='tag-autocomplete'),
 ]
