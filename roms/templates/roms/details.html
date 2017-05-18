@@ -57,7 +57,26 @@
 							</ol>
 						</div>
 						<div id="manual-tab" class="tab-body">
-							Manuell: Hier könnte eine Anleitung stehen.
+							<ol>
+								<li>
+									Zielslot auswählen:
+									<div class="field">
+									  <p class="control">
+									    <span class="select">
+									      <select id="slot-select">
+
+									      </select>
+									    </span>
+									  </p>
+									</div>
+								</li>
+								<li>Rom herunterladen <a id="rom-link" href="#">kein Slot gewählt</a></li>
+								<li>
+									Flash:
+									<code id="flash-command"></code>
+								</li>
+								<li>Badge in den neuen Rom booten</li>
+							</ol>
 						</div>
 
 					</div>
@@ -71,6 +90,22 @@
 </div>
 
 <script type="text/javascript">
+var rom_infos = {
+	0x002000: { lable: "rom0 0x002000", is_low: true},
+	0x082000: { lable: "rom1 0x082000", is_low: false},
+	0x102000: { lable: "rom1 0x102000", is_low: true},
+	0x182000: { lable: "rom3 0x182000", is_low: false},
+	0x202000: { lable: "rom4 0x202000", is_low: true},
+	0x282000: { lable: "rom5 0x282000", is_low: false},
+	0x402000: { lable: "rom6 OTA 0x402000", is_low: true},
+	0x502000: { lable: "rom7 OTA 0x502000", is_low: true},
+	0x602000: { lable: "rom8 OTA 0x602000", is_low: true},
+	0x702000: { lable: "rom9 OTA 0x702000", is_low: true}
+};
+
+var low_url = '{{rom.low_binary.url}}';
+var high_url = '{{rom.high_binary.url}}';
+
 $(document).ready(function() {
 	$("#manual-tab").hide();
 
@@ -81,6 +116,38 @@ $(document).ready(function() {
 		$(".tab-body").hide();
 		active_tab = $(this).attr("data-for-id");
 		$("#" + active_tab).show();
+	});
+
+	for(addr in rom_infos) {
+		$("#slot-select").append('<option value="' + addr + '">' + rom_infos[addr].lable + '</option>')
+	}
+
+	function setSlot(addr) {
+		var rom = rom_infos[addr];
+		var url = '';
+
+		if(rom.is_low) {
+			url = low_url;
+		}
+		else {
+			url = high_url;
+		}
+
+		var parts = url.split('/');
+		var filename = parts[parts.length-1];
+
+		$('#rom-link').text(url);
+		$('#rom-link').attr('href', url);
+
+		command = 'esptool.py write_flash 0x' + addr.toString(16) + ' ' + filename;
+		$("#flash-command").text(command);
+	}
+
+	setSlot(0x002000);
+	$('#slot-select').val(0x002000);
+
+	$("#slot-select").change(function() {
+		setSlot(parseInt($('#slot-select').val()));
 	});
 });
 </script>
