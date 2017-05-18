@@ -69,8 +69,16 @@
 									    </span>
 									  </p>
 									</div>
+									<div class="notification is-danger" id="rom0-warning">
+										Warnung: In diesem Slot liegt der Boot-Selektor.<br/>
+										Wird der überschrieben wird kann man nicht mehr einfach zwischen den ROMs wechseln.
+										Wenn du den Boot-Selektor behalten willst, wähle einen anderen Slot.
+									</div>
+									<br/>
 								</li>
-								<li>Rom herunterladen <a id="rom-link" href="#">kein Slot gewählt</a></li>
+								<li>
+									Rom herunterladen <a id="rom-link" href="#">kein Slot gewählt</a>
+								</li>
 								<li>
 									Flash:
 									<code id="flash-command"></code>
@@ -139,12 +147,19 @@ $(document).ready(function() {
 		$('#rom-link').text(url);
 		$('#rom-link').attr('href', url);
 
+		if(addr === 0x002000) {
+			$("#rom0-warning").show();
+		}
+		else {
+			$("#rom0-warning").hide();
+		}
+
 		command = 'esptool.py write_flash 0x' + addr.toString(16) + ' ' + filename;
 		$("#flash-command").text(command);
 	}
 
-	setSlot(0x002000);
-	$('#slot-select').val(0x002000);
+	setSlot(0x082000);
+	$('#slot-select').val(0x082000);
 
 	$("#slot-select").change(function() {
 		setSlot(parseInt($('#slot-select').val()));
