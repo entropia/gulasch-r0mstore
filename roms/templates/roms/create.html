@@ -83,6 +83,11 @@
 						</div>
 					</div>
 
+					<div class="form-help">
+						Das Cover-Bild wird automatisch quadratisch zugeschnitten und mit einer Auflösung von 300x300 Pixel auf
+						der Übersichtsseite und mit 600x600 Pixel auf der Details-Seite zu deinem Rom angezeigt.
+					</div>
+
 					<div class="field is-horizontal">
 						<div class="field-label is-normal">
 							<label class="label" for="{{form.cover.id_for_label}}">{{form.cover.label}}</label>
@@ -114,6 +119,13 @@
 							</p>
 						</div>
 					</div>
+
+					<div class="form-help">
+						Aufgrund des ESP8266 muss ein Rom anders gelinkt werden,
+						wenn er in den unteren oder oberen 512Kbyte eines 1MByte Flashbereiches liegt.<br/>
+						Deshalb müssen für jeden Rom zwei verschiedene Binaries hochgeladen werden.
+					</div>
+
 
 					<div class="field is-horizontal">
 						<div class="field-label is-normal">

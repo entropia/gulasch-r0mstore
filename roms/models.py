@@ -22,8 +22,8 @@ def upload_binary_to(instance, filename):
 
 class Rom(models.Model):
     name = models.CharField("name", max_length = 128, unique=True)
-    description = models.TextField("description")
-    cover = StdImageField("cover image",
+    description = models.TextField("Beschreibung")
+    cover = StdImageField("cover-Bild",
                                  upload_to = upload_cover_to,
                                  validators = [MinSizeValidator(300,300)],
                                  variations = {'large': {'width': 600, 'height': 600, 'crop': True},
