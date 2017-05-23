@@ -1,0 +1,13 @@
+[Unit]
+Description=romstore uWSGI app
+After=syslog.target
+
+[Service]
+ExecStart=/home/romstore/gulasch-r0mstore/virtenv/bin/uwsgi \
+        --ini /home/romstore/gulasch-r0mstore/uwsgi.ini
+
+Restart=on-failure
+KillSignal=SIGQUIT
+Type=notify
+StandardError=syslog
+NotifyAccess=all

@@ -1,0 +1,11 @@
+[Unit]
+Description=Socket for romstore uWSGI
+
+[Socket]
+ListenStream=/var/run/uwsgi/romstore.socket
+SocketUser=romstore
+SocketGroup=www-data
+SocketMode=0666
+
+[Install]
+WantedBy=sockets.target
