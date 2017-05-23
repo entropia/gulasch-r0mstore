@@ -113,7 +113,8 @@ class RomListJson(ListView):
         for rom in queryset:
             json['roms'][rom.id] = rom.name
 
-        return JsonResponse(json, **response_kwargs, safe=False)
+        response_kwargs['safe'] = False
+        return JsonResponse(json, **response_kwargs)
 
 
 class RomDetailViewJson(DetailView):
@@ -125,4 +126,6 @@ class RomDetailViewJson(DetailView):
 
     def render_to_response(self, context, **response_kwargs):
         rom = self.get_object()
-        return JsonResponse(rom.to_json(), **response_kwargs, safe=False)
+
+        response_kwargs['safe'] = False
+        return JsonResponse(rom.to_json(), **response_kwargs)
