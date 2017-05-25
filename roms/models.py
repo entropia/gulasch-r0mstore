@@ -33,6 +33,7 @@ class Rom(models.Model):
     approved = models.BooleanField("approved", default=False)
     tags = TaggableManager(blank = True)
     user = models.ForeignKey(User, blank=True, null=True)
+    download_count = models.IntegerField()
     creation_time = models.DateTimeField("creation time", auto_now_add = True)
     edit_time = models.DateTimeField("edit time", auto_now = True)
 
@@ -51,6 +52,7 @@ class Rom(models.Model):
             'tags' : self.tag_list(),
             'low_binary' : self.low_binary.url,
             'high_binary' : self.high_binary.url,
+            'download_count' : self.download_count,
             'creation_time' : self.creation_time,
             'edit_time' : self.edit_time
         }

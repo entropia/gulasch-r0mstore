@@ -31,6 +31,7 @@
 						{% endif %}
 						am {{rom.creation_time}}.
 						Zuletzt geupdated am {{rom.edit_time}}<br/>
+						Bisher wurde dieses Rom {{rom.download_count}} heruntergeladen.</br>
 
 						{% for tag in rom.tags.all %}
 						<a href="{% url 'romlist' tag=tag.slug %}"><span class="tag is-medium categorie is-primary">{{tag.name}}</span></a>

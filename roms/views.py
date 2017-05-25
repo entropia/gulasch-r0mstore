@@ -21,7 +21,7 @@ class RomList(ListView):
     def get_queryset(self):
         tag = self.kwargs.get('tag', None)
 
-        queryset = Rom.objects.all().filter(approved = True)
+        queryset = Rom.objects.all().filter(approved = True).order_by('-download_count')
         if tag != None:
             queryset = queryset.filter(tags__slug = tag)
 
@@ -90,7 +90,7 @@ class RomListJson(ListView):
     def get_queryset(self):
         tag = self.kwargs.get('tag', None)
 
-        queryset = Rom.objects.all().filter(approved = True)
+        queryset = Rom.objects.all().filter(approved = True).order_by('-download_count')
         if tag != None:
             queryset = queryset.filter(tags__slug = tag)
 
@@ -126,6 +126,9 @@ class RomDetailViewJson(DetailView):
 
     def render_to_response(self, context, **response_kwargs):
         rom = self.get_object()
+
+        rom.download_count += 1
+        rom.save()
 
         response_kwargs['safe'] = False
         return JsonResponse(rom.to_json(), **response_kwargs)
