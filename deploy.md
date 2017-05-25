@@ -31,6 +31,7 @@ Almost secret deployment battle plan
 15. Setup systemd service and socket files
 14. Setup nginx, see https://uwsgi.readthedocs.io/en/latest/tutorials/Django_and_nginx.html#configure-nginx-for-your-site
     - set paths for media, static and the socket
+    - make sure static points to static_root not static
 15. Testrun without ssl
 15. Setup ssl
 16. Change DEBUG to False in gulashromstore/settings.py

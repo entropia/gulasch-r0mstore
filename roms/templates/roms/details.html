@@ -24,10 +24,10 @@
 					<div class="column">
 						hochgeladen von <strong>{{rom.user.username}}</strong>
 						{% if rom.user.twitter %}
-							<a href="https://twitter.com/{{rom.user.twitter}}"><i class="fa fa-twitter"></i></a>
+							<a target="_blank" href="https://twitter.com/{{rom.user.twitter}}"><i class="fa fa-twitter"></i></a>
 						{% endif %}
 						{% if rom.user.github %}
-							<a href="https://twitter.com/{{rom.user.github}}"><i class="fa fa-github"></i></a>
+							<a target="_blank" href="https://github.com/{{rom.user.github}}"><i class="fa fa-github"></i></a>
 						{% endif %}
 						am {{rom.creation_time}}.
 						Zuletzt geupdated am {{rom.edit_time}}<br/>

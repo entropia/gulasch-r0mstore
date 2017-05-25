@@ -12,7 +12,7 @@ class CustomUserAdmin(UserAdmin):
     form = CustomUserChangeForm
 
     fieldsets = UserAdmin.fieldsets + (
-            ('Additional Attributes', {'fields': ('github',)}),
+            ('Additional Attributes', {'fields': ('github', 'twitter')}),
     )
 
 
