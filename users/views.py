@@ -7,6 +7,7 @@ from django.template import loader
 from django.utils.http import int_to_base36
 from django.http import  Http404
 from django.core.exceptions import PermissionDenied
+from django.conf import settings
 
 from users.forms import UserCreateForm, UserUpdateForm
 
@@ -61,7 +62,7 @@ class SendConfirmationView(TemplateView):
 			'user': user
 		}
 
-		subject = "Validate your registration"
+		subject = u"%s Bestätige deine Registrierung" % settings.EMAIL_SUBJECT_PREFIX
 		email = loader.render_to_string(self.email_template_name, context)
 		user.email_user(subject,email)
 
