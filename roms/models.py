@@ -33,7 +33,7 @@ class Rom(models.Model):
     approved = models.BooleanField("approved", default=False)
     tags = TaggableManager(blank = True)
     user = models.ForeignKey(User, blank=True, null=True)
-    download_count = models.IntegerField()
+    download_count = models.IntegerField(default = 0)
     creation_time = models.DateTimeField("creation time", auto_now_add = True)
     edit_time = models.DateTimeField("edit time", auto_now = True)
 
