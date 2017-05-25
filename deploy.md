@@ -24,7 +24,7 @@ Almost secret deployment battle plan
 9. Setup mail configuration https://docs.djangoproject.com/en/1.11/ref/settings/#email
 10. ```manage.py migrate```
 11. ```manage.py createsuperuser```
-12. ```manage.py collect static```
+12. ```manage.py collectstatic```
 13. Set up a uswgi configuration (use systemd/uwsgi.ini)
     - update paths
     - update user/group ids
