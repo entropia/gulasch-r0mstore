@@ -31,7 +31,7 @@
 						{% endif %}
 						am {{rom.creation_time}}.
 						Zuletzt geupdated am {{rom.edit_time}}<br/>
-						Bisher wurde dieses Rom {{rom.download_count}} heruntergeladen.</br>
+						Bisher wurde dieses Rom <strong>{{rom.download_count}}</strong> mal heruntergeladen.</br>
 
 						{% for tag in rom.tags.all %}
 						<a href="{% url 'romlist' tag=tag.slug %}"><span class="tag is-medium categorie is-primary">{{tag.name}}</span></a>
@@ -111,7 +111,7 @@
 var rom_infos = {
 	0x002000: { lable: "rom0 0x002000", is_low: true},
 	0x082000: { lable: "rom1 0x082000", is_low: false},
-	0x102000: { lable: "rom1 0x102000", is_low: true},
+	0x102000: { lable: "rom2 0x102000", is_low: true},
 	0x182000: { lable: "rom3 0x182000", is_low: false},
 	0x202000: { lable: "rom4 0x202000", is_low: true},
 	0x282000: { lable: "rom5 0x282000", is_low: false},
