@@ -22,7 +22,7 @@ def upload_binary_to(instance, filename):
 
 class Rom(models.Model):
     name = models.CharField("name", max_length = 128, unique=True)
-    description = models.TextField("Beschreibung")
+    description = models.TextField("Beschreibung", max_length=1024)
     cover = StdImageField("cover-Bild",
                                  upload_to = upload_cover_to,
                                  validators = [MinSizeValidator(300,300)],
