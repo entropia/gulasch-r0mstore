@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 
-from django.contrib.auth.views import password_reset, password_reset_confirm, password_reset_done, login, logout
+from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, PasswordResetDoneView, LoginView, LogoutView
 
 
 from users.views import *
@@ -13,18 +13,18 @@ urlpatterns = [
 
 	url(r'^update/(?P<user_id>\d+)/$', UserUpdateView.as_view(), name='user_update'),
 
-	url(r'^password/reset/$', password_reset, {'template_name' : 'users/password_reset.html',
-											'post_reset_redirect' : reverse_lazy('password_reset_sent')},
+	url(r'^password/reset/$', PasswordResetView.as_view(**{'template_name' : 'users/password_reset.html',
+											'success_url' : reverse_lazy('password_reset_sent')}),
 											name='password_reset'),
 
-	url(r'^password/reset/(?P<uidb64>[0-9A-Za-z]+)/(?P<token>.+)/$', password_reset_confirm,
-														{'template_name' : 'users/password_reset_confirm.html',
-														'post_reset_redirect' : reverse_lazy('login')},
+	url(r'^password/reset/(?P<uidb64>[0-9A-Za-z]+)/(?P<token>.+)/$', PasswordResetConfirmView.as_view(
+											                        **{'template_name' : 'users/password_reset_confirm.html',
+														'success_url' : reverse_lazy('login')}),
 														name='password_reset_confirm'),
 
-	url(r'^password/reset/sent/$', password_reset_done, { 'template_name' : 'users/password_reset_sent.html',},
+	url(r'^password/reset/sent/$', PasswordResetDoneView.as_view(**{ 'template_name' : 'users/password_reset_sent.html',}),
 														name='password_reset_sent'),
 
-	url(r'^login/$', login, {'template_name' : 'users/login.html'}, name='login'),
-	url(r'^logout/$', logout ,{'next_page' : reverse_lazy('login')}, name='logout')
+	url(r'^login/$', LoginView.as_view(**{'template_name' : 'users/login.html'}), name='login'),
+	url(r'^logout/$', LogoutView.as_view(**{'next_page' : reverse_lazy('login')}), name='logout')
 ]
