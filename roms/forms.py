@@ -1,7 +1,7 @@
 from dal import autocomplete
 
 from django.forms import ModelForm
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 
 from roms.models import Rom
 

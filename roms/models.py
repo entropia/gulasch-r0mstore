@@ -3,7 +3,7 @@ import uuid
 
 from django.db import models
 from django.core.exceptions import ValidationError
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from taggit.managers import TaggableManager
 
@@ -32,7 +32,7 @@ class Rom(models.Model):
     high_binary = models.FileField("high binary", upload_to = upload_binary_to)
     approved = models.BooleanField("approved", default=False)
     tags = TaggableManager(blank = True)
-    user = models.ForeignKey(User, blank=True, null=True)
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.PROTECT)
     download_count = models.IntegerField(default = 0)
     creation_time = models.DateTimeField("creation time", auto_now_add = True)
     edit_time = models.DateTimeField("edit time", auto_now = True)

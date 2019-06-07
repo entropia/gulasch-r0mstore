@@ -1,7 +1,7 @@
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.base import TemplateView
 from django.contrib.auth import get_user_model
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib.auth.tokens import default_token_generator
 from django.template import loader
 from django.utils.http import int_to_base36
